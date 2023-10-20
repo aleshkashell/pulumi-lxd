@@ -1,0 +1,2 @@
+github.com/pulumi/pulumi-terraform-bridge/v3 v3.47.2/go.mod h1:bXuzPzwY73LZH5+EgdSlHTV8ed09p51ztpca2G13fLI=
+github.com/pulumi/pulumi/sdk/v3 v3.67.1/go.mod h1:A/WHc5MlxU8GpX/sRmfQ9G0/Bxxl4GNdSP7TQmy4yIw=
