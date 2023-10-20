@@ -15,8 +15,8 @@
 package main
 
 import (
-	lxd "github.com/pulumi/pulumi-lxd/provider"
-	"github.com/pulumi/pulumi-lxd/provider/pkg/version"
+	lxd "github.com/aleshkashell/pulumi-lxd/provider"
+	"github.com/aleshkashell/pulumi-lxd/provider/pkg/version"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
 )
 

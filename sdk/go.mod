@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-lxd/sdk
+module github.com/aleshkashell/pulumi-lxd/sdk
 
 go 1.17
 

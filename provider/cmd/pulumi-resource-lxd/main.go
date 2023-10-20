@@ -19,8 +19,8 @@ package main
 import (
 	_ "embed"
 
-	lxd "github.com/pulumi/pulumi-lxd/provider"
-	"github.com/pulumi/pulumi-lxd/provider/pkg/version"
+	lxd "github.com/aleshkashell/pulumi-lxd/provider"
+	"github.com/aleshkashell/pulumi-lxd/provider/pkg/version"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 )
 

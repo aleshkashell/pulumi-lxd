@@ -370,7 +370,7 @@ builds:
   - linux
   ignore: []
   ldflags:
-  - -X github.com/pulumi/pulumi-lxd/provider/pkg/version.Version={{.Tag}}
+  - -X github.com/aleshkashell/pulumi-lxd/provider/pkg/version.Version={{.Tag}}
   main: ./cmd/pulumi-resource-lxd/
   sort: asc
   use: git
