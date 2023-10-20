@@ -153,7 +153,6 @@ func Provider() tfbridge.ProviderInfo {
 	// For more information, please reference: https://pkg.go.dev/github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge#ProviderInfo.ComputeTokens
 	prov.MustComputeTokens(tokens.SingleModule("lxd_", mainMod,
 		tokens.MakeStandard(mainPkg)))
-	prov.MustApplyAutoAliasing()
 	prov.SetAutonaming(255, "-")
 
 	return prov
