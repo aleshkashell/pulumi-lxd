@@ -2,7 +2,7 @@ PROJECT_NAME := lxd Package
 
 SHELL            := /bin/bash
 PACK             := lxd
-ORG              := pulumi
+ORG              := aleshkashell
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
 NODE_MODULE_NAME := @pulumi/${PACK}
 TF_NAME          := ${PACK}
