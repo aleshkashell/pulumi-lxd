@@ -6,7 +6,7 @@ package lxd
 import (
 	"fmt"
 
-	"github.com/aleshkashell/pulumi-lxd//sdk/go/lxd/internal"
+	"github.com/aleshkashell/pulumi-lxd/sdk/go/lxd/internal"
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
