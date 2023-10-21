@@ -23,6 +23,7 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "lxd"
+        "name": "lxd",
+        "server": "https://github.com/aleshkashell/pulumi-lxd/releases/"
     }
 }

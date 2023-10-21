@@ -8,9 +8,10 @@
     ],
     "homepage": "https://www.pulumi.com",
     "license": "Apache-2.0",
-    "attribution": "This Pulumi package is based on the [`lxd` Terraform Provider](https://github.com/terraform-providers/terraform-provider-lxd).",
+    "attribution": "This Pulumi package is based on the [`lxd` Terraform Provider](https://github.com/aleshkashell/terraform-provider-lxd).",
     "repository": "https://github.com/aleshkashell/pulumi-lxd",
-    "publisher": "Pulumi",
+    "pluginDownloadURL": "https://github.com/aleshkashell/pulumi-lxd/releases/",
+    "publisher": "aleshkashell",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
     },
@@ -22,13 +23,13 @@
             "compatibility": "tfbridge20"
         },
         "go": {
-            "importBasePath": "github.com/aleshkashell/pulumi-lxd/sdk/go/lxd",
+            "importBasePath": "github.com/pulumi/pulumi-lxd/sdk/go/lxd",
             "generateResourceContainerTypes": true,
             "generateExtraInputTypes": true
         },
         "nodejs": {
             "packageDescription": "A Pulumi package for creating and managing lxd cloud resources.",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-lxd)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-lxd` repo](https://github.com/aleshkashell/pulumi-lxd/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-lxd` repo](https://github.com/terraform-providers/terraform-provider-lxd/issues).",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/aleshkashell/terraform-provider-lxd)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-lxd` repo](https://github.com/aleshkashell/pulumi-lxd/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-lxd` repo](https://github.com/aleshkashell/terraform-provider-lxd/issues).",
             "dependencies": {
                 "@pulumi/pulumi": "^3.0.0"
             },
@@ -43,7 +44,7 @@
             "requires": {
                 "pulumi": "\u003e=3.0.0,\u003c4.0.0"
             },
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-lxd)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-lxd` repo](https://github.com/aleshkashell/pulumi-lxd/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-lxd` repo](https://github.com/terraform-providers/terraform-provider-lxd/issues).",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/aleshkashell/terraform-provider-lxd)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-lxd` repo](https://github.com/aleshkashell/pulumi-lxd/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-lxd` repo](https://github.com/aleshkashell/terraform-provider-lxd/issues).",
             "compatibility": "tfbridge20",
             "pyproject": {}
         }
