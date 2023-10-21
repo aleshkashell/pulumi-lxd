@@ -1,0 +1,2318 @@
+{
+    "name": "lxd",
+    "description": "A Pulumi package for creating and managing lxd cloud resources.",
+    "keywords": [
+        "pulumi",
+        "lxd",
+        "category/cloud"
+    ],
+    "homepage": "https://www.pulumi.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`lxd` Terraform Provider](https://github.com/terraform-providers/terraform-provider-lxd).",
+    "repository": "https://github.com/aleshkashell/pulumi-lxd",
+    "publisher": "Pulumi",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "compatibility": "tfbridge20"
+        },
+        "go": {
+            "importBasePath": "github.com/pulumi/pulumi-lxd/sdk/go/lxd",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true
+        },
+        "nodejs": {
+            "packageDescription": "A Pulumi package for creating and managing lxd cloud resources.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-lxd)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-lxd` repo](https://github.com/aleshkashell/pulumi-lxd/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-lxd` repo](https://github.com/terraform-providers/terraform-provider-lxd/issues).",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true
+        },
+        "python": {
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            },
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-lxd)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-lxd` repo](https://github.com/aleshkashell/pulumi-lxd/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-lxd` repo](https://github.com/terraform-providers/terraform-provider-lxd/issues).",
+            "compatibility": "tfbridge20",
+            "pyproject": {}
+        }
+    },
+    "config": {
+        "variables": {
+            "acceptRemoteCertificate": {
+                "type": "boolean",
+                "description": "Accept the server certificate\n"
+            },
+            "address": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.address` instead."
+            },
+            "configDir": {
+                "type": "string",
+                "description": "The directory to look for existing LXD configuration. default = $HOME/snap/lxd/common/config:$HOME/.config/lxc\n"
+            },
+            "generateClientCertificates": {
+                "type": "boolean"
+            },
+            "lxdRemotes": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/types/lxd:config/lxdRemotes:lxdRemotes"
+                }
+            },
+            "port": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.port` instead."
+            },
+            "project": {
+                "type": "string",
+                "description": "The project where project-scoped resources will be created. Can be overridden in individual resources. default = default\n"
+            },
+            "refreshInterval": {
+                "type": "string",
+                "description": "How often to poll during state changes (default 10s)\n"
+            },
+            "remote": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.name` instead."
+            },
+            "remotePassword": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.password` instead.",
+                "secret": true
+            },
+            "scheme": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.scheme` instead."
+            }
+        }
+    },
+    "types": {
+        "lxd:config/lxdRemotes:lxdRemotes": {
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "default": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "secret": true
+                },
+                "port": {
+                    "type": "string"
+                },
+                "scheme": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "lxd:index/ContainerDevice:ContainerDevice": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "properties": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "properties",
+                "type"
+            ]
+        },
+        "lxd:index/ContainerFile:ContainerFile": {
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "createDirectories": {
+                    "type": "boolean"
+                },
+                "gid": {
+                    "type": "integer"
+                },
+                "mode": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "targetFile": {
+                    "type": "string"
+                },
+                "uid": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "targetFile"
+            ]
+        },
+        "lxd:index/InstanceDevice:InstanceDevice": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "properties": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "properties",
+                "type"
+            ]
+        },
+        "lxd:index/InstanceFile:InstanceFile": {
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "createDirectories": {
+                    "type": "boolean"
+                },
+                "gid": {
+                    "type": "integer"
+                },
+                "mode": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "targetFile": {
+                    "type": "string"
+                },
+                "uid": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "targetFile"
+            ]
+        },
+        "lxd:index/ProfileDevice:ProfileDevice": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "properties": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "properties",
+                "type"
+            ]
+        },
+        "lxd:index/ProviderLxdRemote:ProviderLxdRemote": {
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "default": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "secret": true
+                },
+                "port": {
+                    "type": "string"
+                },
+                "scheme": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": []
+                }
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the lxd package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "acceptRemoteCertificate": {
+                "type": "boolean",
+                "description": "Accept the server certificate\n"
+            },
+            "address": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.address` instead."
+            },
+            "configDir": {
+                "type": "string",
+                "description": "The directory to look for existing LXD configuration. default = $HOME/snap/lxd/common/config:$HOME/.config/lxc\n"
+            },
+            "generateClientCertificates": {
+                "type": "boolean"
+            },
+            "lxdRemotes": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/types/lxd:index/ProviderLxdRemote:ProviderLxdRemote"
+                }
+            },
+            "port": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.port` instead."
+            },
+            "project": {
+                "type": "string",
+                "description": "The project where project-scoped resources will be created. Can be overridden in individual resources. default = default\n"
+            },
+            "refreshInterval": {
+                "type": "string",
+                "description": "How often to poll during state changes (default 10s)\n"
+            },
+            "remote": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.name` instead."
+            },
+            "remotePassword": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.password` instead.",
+                "secret": true
+            },
+            "scheme": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.scheme` instead."
+            }
+        },
+        "inputProperties": {
+            "acceptRemoteCertificate": {
+                "type": "boolean",
+                "description": "Accept the server certificate\n"
+            },
+            "address": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.address` instead."
+            },
+            "configDir": {
+                "type": "string",
+                "description": "The directory to look for existing LXD configuration. default = $HOME/snap/lxd/common/config:$HOME/.config/lxc\n"
+            },
+            "generateClientCertificates": {
+                "type": "boolean"
+            },
+            "lxdRemotes": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/types/lxd:index/ProviderLxdRemote:ProviderLxdRemote"
+                }
+            },
+            "port": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.port` instead."
+            },
+            "project": {
+                "type": "string",
+                "description": "The project where project-scoped resources will be created. Can be overridden in individual resources. default = default\n"
+            },
+            "refreshInterval": {
+                "type": "string",
+                "description": "How often to poll during state changes (default 10s)\n"
+            },
+            "remote": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.name` instead."
+            },
+            "remotePassword": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.password` instead.",
+                "secret": true
+            },
+            "scheme": {
+                "type": "string",
+                "deprecationMessage": "Use `lxd_remote.scheme` instead."
+            }
+        }
+    },
+    "resources": {
+        "lxd:index/cachedImage:CachedImage": {
+            "properties": {
+                "aliases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "architecture": {
+                    "type": "string"
+                },
+                "copiedAliases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "copyAliases": {
+                    "type": "boolean"
+                },
+                "createdAt": {
+                    "type": "integer"
+                },
+                "fingerprint": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                },
+                "remote": {
+                    "type": "string"
+                },
+                "sourceImage": {
+                    "type": "string"
+                },
+                "sourceRemote": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "architecture",
+                "copiedAliases",
+                "createdAt",
+                "fingerprint",
+                "sourceImage",
+                "sourceRemote"
+            ],
+            "inputProperties": {
+                "aliases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "copyAliases": {
+                    "type": "boolean",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "remote": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "sourceImage": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "sourceRemote": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "sourceImage",
+                "sourceRemote"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering CachedImage resources.\n",
+                "properties": {
+                    "aliases": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "architecture": {
+                        "type": "string"
+                    },
+                    "copiedAliases": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "copyAliases": {
+                        "type": "boolean",
+                        "willReplaceOnChanges": true
+                    },
+                    "createdAt": {
+                        "type": "integer"
+                    },
+                    "fingerprint": {
+                        "type": "string"
+                    },
+                    "project": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "remote": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "sourceImage": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "sourceRemote": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "lxd:index/container:Container": {
+            "properties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "devices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/lxd:index/ContainerDevice:ContainerDevice"
+                    }
+                },
+                "ephemeral": {
+                    "type": "boolean"
+                },
+                "files": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/lxd:index/ContainerFile:ContainerFile"
+                    }
+                },
+                "image": {
+                    "type": "string"
+                },
+                "ipAddress": {
+                    "type": "string"
+                },
+                "ipv4Address": {
+                    "type": "string"
+                },
+                "ipv6Address": {
+                    "type": "string"
+                },
+                "limits": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "macAddress": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "privileged": {
+                    "type": "boolean",
+                    "deprecationMessage": "Use a config setting of security.privileged=1 instead"
+                },
+                "profiles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "project": {
+                    "type": "string"
+                },
+                "remote": {
+                    "type": "string"
+                },
+                "startContainer": {
+                    "type": "boolean"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "waitForNetwork": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "image",
+                "ipAddress",
+                "ipv4Address",
+                "ipv6Address",
+                "macAddress",
+                "name",
+                "profiles",
+                "status",
+                "target",
+                "type"
+            ],
+            "inputProperties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "devices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/lxd:index/ContainerDevice:ContainerDevice"
+                    }
+                },
+                "ephemeral": {
+                    "type": "boolean",
+                    "willReplaceOnChanges": true
+                },
+                "files": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/lxd:index/ContainerFile:ContainerFile"
+                    }
+                },
+                "image": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "limits": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "privileged": {
+                    "type": "boolean",
+                    "deprecationMessage": "Use a config setting of security.privileged=1 instead"
+                },
+                "profiles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "project": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "remote": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "startContainer": {
+                    "type": "boolean"
+                },
+                "target": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "waitForNetwork": {
+                    "type": "boolean"
+                }
+            },
+            "requiredInputs": [
+                "image"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Container resources.\n",
+                "properties": {
+                    "config": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        }
+                    },
+                    "devices": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/lxd:index/ContainerDevice:ContainerDevice"
+                        }
+                    },
+                    "ephemeral": {
+                        "type": "boolean",
+                        "willReplaceOnChanges": true
+                    },
+                    "files": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/lxd:index/ContainerFile:ContainerFile"
+                        }
+                    },
+                    "image": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipAddress": {
+                        "type": "string"
+                    },
+                    "ipv4Address": {
+                        "type": "string"
+                    },
+                    "ipv6Address": {
+                        "type": "string"
+                    },
+                    "limits": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        }
+                    },
+                    "macAddress": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "privileged": {
+                        "type": "boolean",
+                        "deprecationMessage": "Use a config setting of security.privileged=1 instead"
+                    },
+                    "profiles": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "project": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "remote": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "startContainer": {
+                        "type": "boolean"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "target": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "waitForNetwork": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "lxd:index/containerFile:ContainerFile": {
+            "properties": {
+                "append": {
+                    "type": "boolean"
+                },
+                "containerName": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "createDirectories": {
+                    "type": "boolean"
+                },
+                "gid": {
+                    "type": "integer"
+                },
+                "mode": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                },
+                "remote": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "targetFile": {
+                    "type": "string"
+                },
+                "uid": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "containerName",
+                "targetFile"
+            ],
+            "inputProperties": {
+                "append": {
+                    "type": "boolean",
+                    "willReplaceOnChanges": true
+                },
+                "containerName": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "content": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "createDirectories": {
+                    "type": "boolean",
+                    "willReplaceOnChanges": true
+                },
+                "gid": {
+                    "type": "integer",
+                    "willReplaceOnChanges": true
+                },
+                "mode": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "remote": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "source": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "targetFile": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "uid": {
+                    "type": "integer",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "containerName",
+                "targetFile"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ContainerFile resources.\n",
+                "properties": {
+                    "append": {
+                        "type": "boolean",
+                        "willReplaceOnChanges": true
+                    },
+                    "containerName": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "content": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "createDirectories": {
+                        "type": "boolean",
+                        "willReplaceOnChanges": true
+                    },
+                    "gid": {
+                        "type": "integer",
+                        "willReplaceOnChanges": true
+                    },
+                    "mode": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "project": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "remote": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "source": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "targetFile": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "uid": {
+                        "type": "integer",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "lxd:index/instance:Instance": {
+            "properties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "devices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/lxd:index/InstanceDevice:InstanceDevice"
+                    }
+                },
+                "ephemeral": {
+                    "type": "boolean"
+                },
+                "files": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/lxd:index/InstanceFile:InstanceFile"
+                    }
+                },
+                "image": {
+                    "type": "string"
+                },
+                "ipAddress": {
+                    "type": "string"
+                },
+                "ipv4Address": {
+                    "type": "string"
+                },
+                "ipv6Address": {
+                    "type": "string"
+                },
+                "limits": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "macAddress": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "privileged": {
+                    "type": "boolean",
+                    "deprecationMessage": "Use a config setting of security.privileged=1 instead"
+                },
+                "profiles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "project": {
+                    "type": "string"
+                },
+                "remote": {
+                    "type": "string"
+                },
+                "startOnCreate": {
+                    "type": "boolean"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "waitForNetwork": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "image",
+                "ipAddress",
+                "ipv4Address",
+                "ipv6Address",
+                "macAddress",
+                "name",
+                "profiles",
+                "status",
+                "target",
+                "type"
+            ],
+            "inputProperties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "devices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/lxd:index/InstanceDevice:InstanceDevice"
+                    }
+                },
+                "ephemeral": {
+                    "type": "boolean",
+                    "willReplaceOnChanges": true
+                },
+                "files": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/lxd:index/InstanceFile:InstanceFile"
+                    }
+                },
+                "image": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "limits": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "privileged": {
+                    "type": "boolean",
+                    "deprecationMessage": "Use a config setting of security.privileged=1 instead"
+                },
+                "profiles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "project": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "remote": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "startOnCreate": {
+                    "type": "boolean"
+                },
+                "target": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "waitForNetwork": {
+                    "type": "boolean"
+                }
+            },
+            "requiredInputs": [
+                "image"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Instance resources.\n",
+                "properties": {
+                    "config": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        }
+                    },
+                    "devices": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/lxd:index/InstanceDevice:InstanceDevice"
+                        }
+                    },
+                    "ephemeral": {
+                        "type": "boolean",
+                        "willReplaceOnChanges": true
+                    },
+                    "files": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/lxd:index/InstanceFile:InstanceFile"
+                        }
+                    },
+                    "image": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipAddress": {
+                        "type": "string"
+                    },
+                    "ipv4Address": {
+                        "type": "string"
+                    },
+                    "ipv6Address": {
+                        "type": "string"
+                    },
+                    "limits": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        }
+                    },
+                    "macAddress": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "privileged": {
+                        "type": "boolean",
+                        "deprecationMessage": "Use a config setting of security.privileged=1 instead"
+                    },
+                    "profiles": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "project": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "remote": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "startOnCreate": {
+                        "type": "boolean"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "target": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "waitForNetwork": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "lxd:index/instanceFile:InstanceFile": {
+            "properties": {
+                "append": {
+                    "type": "boolean"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "createDirectories": {
+                    "type": "boolean"
+                },
+                "gid": {
+                    "type": "integer"
+                },
+                "instanceName": {
+                    "type": "string"
+                },
+                "mode": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                },
+                "remote": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "targetFile": {
+                    "type": "string"
+                },
+                "uid": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "instanceName",
+                "targetFile"
+            ],
+            "inputProperties": {
+                "append": {
+                    "type": "boolean",
+                    "willReplaceOnChanges": true
+                },
+                "content": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "createDirectories": {
+                    "type": "boolean",
+                    "willReplaceOnChanges": true
+                },
+                "gid": {
+                    "type": "integer",
+                    "willReplaceOnChanges": true
+                },
+                "instanceName": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "mode": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "remote": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "source": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "targetFile": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "uid": {
+                    "type": "integer",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "instanceName",
+                "targetFile"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering InstanceFile resources.\n",
+                "properties": {
+                    "append": {
+                        "type": "boolean",
+                        "willReplaceOnChanges": true
+                    },
+                    "content": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "createDirectories": {
+                        "type": "boolean",
+                        "willReplaceOnChanges": true
+                    },
+                    "gid": {
+                        "type": "integer",
+                        "willReplaceOnChanges": true
+                    },
+                    "instanceName": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "mode": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "project": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "remote": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "source": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "targetFile": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "uid": {
+                        "type": "integer",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "lxd:index/network:Network": {
+            "properties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "description": {
+                    "type": "string"
+                },
+                "managed": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                },
+                "remote": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "managed",
+                "name",
+                "type"
+            ],
+            "inputProperties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "remote": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "target": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Network resources.\n",
+                "properties": {
+                    "config": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        }
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "managed": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "project": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "remote": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "target": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "lxd:index/profile:Profile": {
+            "properties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "description": {
+                    "type": "string"
+                },
+                "devices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/lxd:index/ProfileDevice:ProfileDevice"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                },
+                "remote": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "inputProperties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "description": {
+                    "type": "string"
+                },
+                "devices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/lxd:index/ProfileDevice:ProfileDevice"
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "remote": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Profile resources.\n",
+                "properties": {
+                    "config": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        }
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "devices": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/lxd:index/ProfileDevice:ProfileDevice"
+                        }
+                    },
+                    "name": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "project": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "remote": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "lxd:index/project:Project": {
+            "properties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "inputProperties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "target": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Project resources.\n",
+                "properties": {
+                    "config": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        }
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "target": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "lxd:index/publishImage:PublishImage": {
+            "properties": {
+                "aliases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "architecture": {
+                    "type": "string"
+                },
+                "compressionAlgorithm": {
+                    "type": "string"
+                },
+                "container": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "integer"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "fingerprint": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                },
+                "properties": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "public": {
+                    "type": "boolean"
+                },
+                "triggers": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "A map of arbitrary strings that, when changed, will force the resource to be replaced.\n"
+                }
+            },
+            "required": [
+                "architecture",
+                "container",
+                "createdAt",
+                "fingerprint"
+            ],
+            "inputProperties": {
+                "aliases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "compressionAlgorithm": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "container": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "filename": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "properties": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "public": {
+                    "type": "boolean",
+                    "willReplaceOnChanges": true
+                },
+                "triggers": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "A map of arbitrary strings that, when changed, will force the resource to be replaced.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "container"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering PublishImage resources.\n",
+                "properties": {
+                    "aliases": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "architecture": {
+                        "type": "string"
+                    },
+                    "compressionAlgorithm": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "container": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "createdAt": {
+                        "type": "integer"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "fingerprint": {
+                        "type": "string"
+                    },
+                    "project": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "properties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        }
+                    },
+                    "public": {
+                        "type": "boolean",
+                        "willReplaceOnChanges": true
+                    },
+                    "triggers": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        },
+                        "description": "A map of arbitrary strings that, when changed, will force the resource to be replaced.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "lxd:index/snapshot:Snapshot": {
+            "properties": {
+                "containerName": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "creationDate": {
+                    "type": "string",
+                    "deprecationMessage": "Use created_at instead"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                },
+                "remote": {
+                    "type": "string"
+                },
+                "stateful": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "containerName",
+                "createdAt",
+                "creationDate",
+                "name"
+            ],
+            "inputProperties": {
+                "containerName": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "remote": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "stateful": {
+                    "type": "boolean",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "containerName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Snapshot resources.\n",
+                "properties": {
+                    "containerName": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "creationDate": {
+                        "type": "string",
+                        "deprecationMessage": "Use created_at instead"
+                    },
+                    "name": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "project": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "remote": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "stateful": {
+                        "type": "boolean",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "lxd:index/storagePool:StoragePool": {
+            "properties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "driver": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                },
+                "remote": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "driver",
+                "name"
+            ],
+            "inputProperties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "driver": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "remote": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "target": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "driver"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering StoragePool resources.\n",
+                "properties": {
+                    "config": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        }
+                    },
+                    "driver": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "project": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "remote": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "target": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "lxd:index/volume:Volume": {
+            "properties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "contentType": {
+                    "type": "string"
+                },
+                "expandedConfig": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "location": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "pool": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                },
+                "remote": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "expandedConfig",
+                "location",
+                "name",
+                "pool"
+            ],
+            "inputProperties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "contentType": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "pool": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "project": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "remote": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "target": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "pool"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Volume resources.\n",
+                "properties": {
+                    "config": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        }
+                    },
+                    "contentType": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "expandedConfig": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        }
+                    },
+                    "location": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "pool": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "project": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "remote": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "target": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "lxd:index/volumeContainerAttach:VolumeContainerAttach": {
+            "properties": {
+                "containerName": {
+                    "type": "string",
+                    "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed"
+                },
+                "deviceName": {
+                    "type": "string",
+                    "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed"
+                },
+                "path": {
+                    "type": "string",
+                    "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed"
+                },
+                "pool": {
+                    "type": "string",
+                    "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed"
+                },
+                "remote": {
+                    "type": "string",
+                    "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed"
+                },
+                "volumeName": {
+                    "type": "string",
+                    "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed"
+                }
+            },
+            "required": [
+                "containerName",
+                "deviceName",
+                "path",
+                "pool",
+                "volumeName"
+            ],
+            "inputProperties": {
+                "containerName": {
+                    "type": "string",
+                    "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed",
+                    "willReplaceOnChanges": true
+                },
+                "deviceName": {
+                    "type": "string",
+                    "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed",
+                    "willReplaceOnChanges": true
+                },
+                "path": {
+                    "type": "string",
+                    "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed",
+                    "willReplaceOnChanges": true
+                },
+                "pool": {
+                    "type": "string",
+                    "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed",
+                    "willReplaceOnChanges": true
+                },
+                "remote": {
+                    "type": "string",
+                    "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed",
+                    "willReplaceOnChanges": true
+                },
+                "volumeName": {
+                    "type": "string",
+                    "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "containerName",
+                "path",
+                "pool",
+                "volumeName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering VolumeContainerAttach resources.\n",
+                "properties": {
+                    "containerName": {
+                        "type": "string",
+                        "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed",
+                        "willReplaceOnChanges": true
+                    },
+                    "deviceName": {
+                        "type": "string",
+                        "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed",
+                        "willReplaceOnChanges": true
+                    },
+                    "path": {
+                        "type": "string",
+                        "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed",
+                        "willReplaceOnChanges": true
+                    },
+                    "pool": {
+                        "type": "string",
+                        "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed",
+                        "willReplaceOnChanges": true
+                    },
+                    "remote": {
+                        "type": "string",
+                        "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed",
+                        "willReplaceOnChanges": true
+                    },
+                    "volumeName": {
+                        "type": "string",
+                        "deprecationMessage": "lxd_volume_container_attach has been deprecated and will be removed",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "lxd:index/volumeCopy:VolumeCopy": {
+            "properties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "contentType": {
+                    "type": "string"
+                },
+                "expandedConfig": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    }
+                },
+                "location": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the destination volume.\n"
+                },
+                "pool": {
+                    "type": "string",
+                    "description": "The destination pool.\n"
+                },
+                "remote": {
+                    "type": "string",
+                    "description": "The destination remote.\n"
+                },
+                "sourceName": {
+                    "type": "string",
+                    "description": "The name of the source volume.\n"
+                },
+                "sourcePool": {
+                    "type": "string",
+                    "description": "The source pool.\n"
+                },
+                "sourceRemote": {
+                    "type": "string",
+                    "description": "The remote from which the source volume is copied.\n"
+                },
+                "target": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "config",
+                "contentType",
+                "expandedConfig",
+                "location",
+                "name",
+                "pool",
+                "sourceName",
+                "sourcePool"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the destination volume.\n",
+                    "willReplaceOnChanges": true
+                },
+                "pool": {
+                    "type": "string",
+                    "description": "The destination pool.\n",
+                    "willReplaceOnChanges": true
+                },
+                "remote": {
+                    "type": "string",
+                    "description": "The destination remote.\n",
+                    "willReplaceOnChanges": true
+                },
+                "sourceName": {
+                    "type": "string",
+                    "description": "The name of the source volume.\n",
+                    "willReplaceOnChanges": true
+                },
+                "sourcePool": {
+                    "type": "string",
+                    "description": "The source pool.\n",
+                    "willReplaceOnChanges": true
+                },
+                "sourceRemote": {
+                    "type": "string",
+                    "description": "The remote from which the source volume is copied.\n",
+                    "willReplaceOnChanges": true
+                },
+                "target": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "pool",
+                "sourceName",
+                "sourcePool"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering VolumeCopy resources.\n",
+                "properties": {
+                    "config": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        }
+                    },
+                    "contentType": {
+                        "type": "string"
+                    },
+                    "expandedConfig": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        }
+                    },
+                    "location": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the destination volume.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "pool": {
+                        "type": "string",
+                        "description": "The destination pool.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "remote": {
+                        "type": "string",
+                        "description": "The destination remote.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "sourceName": {
+                        "type": "string",
+                        "description": "The name of the source volume.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "sourcePool": {
+                        "type": "string",
+                        "description": "The source pool.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "sourceRemote": {
+                        "type": "string",
+                        "description": "The remote from which the source volume is copied.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "target": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
