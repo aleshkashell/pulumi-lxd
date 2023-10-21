@@ -1,5 +1,4 @@
 {
   "resource": true,
-  "name": "lxd",
-  "server": "https://github.com/aleshkashell/pulumi-lxd/releases/"
+  "name": "lxd"
 }
