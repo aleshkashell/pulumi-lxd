@@ -53,6 +53,7 @@ namespace Pulumi.Lxd
         {
             var dst = src ?? new global::Pulumi.InvokeOptions{};
             dst.Version = src?.Version ?? Version;
+            dst.PluginDownloadURL = src?.PluginDownloadURL ?? "https://github.com/aleshkashell/pulumi-lxd/releases/";
             return dst;
         }
 

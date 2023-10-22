@@ -69,6 +69,7 @@ namespace Pulumi.Lxd
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "https://github.com/aleshkashell/pulumi-lxd/releases/",
                 AdditionalSecretOutputs =
                 {
                     "remotePassword",
