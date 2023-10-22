@@ -1,3 +1,3 @@
-module lxd
+module github.com/aleshkashell/pulumi-lxd/sdk/go/lxd
 
-go 1.21.1
+go 1.21
