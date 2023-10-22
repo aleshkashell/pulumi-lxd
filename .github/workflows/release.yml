@@ -1,3 +1,16 @@
-on:
-  release:
-    types: [created]
+#on:
+#  release:
+#    types: [created]
+on: [push]
+jobs:
+  BuildBinary:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Step one 1"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: List files in repo
+        run: |
+          ls ${{ github.workspace }}
+      - name: Build provider
+        run: make provider
