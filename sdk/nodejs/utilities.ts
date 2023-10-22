@@ -50,7 +50,7 @@ export function getVersion(): string {
 
 /** @internal */
 export function resourceOptsDefaults(): any {
-    return { version: getVersion(), pluginDownloadURL: "https://github.com/aleshkashell/pulumi-lxd/releases/" };
+    return { version: getVersion(), pluginDownloadURL: "https://github.com/aleshkashell/pulumi-lxd/releases/download/v0.0.1/pulumi-resource-lxd" };
 }
 
 /** @internal */
