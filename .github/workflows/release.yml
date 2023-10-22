@@ -10,7 +10,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: List files in repo
-        run: |
-          ls ${{ github.workspace }}
+        run: ls ./bin
+      - name: Make tfgen
+        run: make tfgen
+      - name: List binary files in repo
+        run: ls ./bin
       - name: Build provider
         run: make provider
+      - name: List binary files in repo
+        run: ls ./bin
+
