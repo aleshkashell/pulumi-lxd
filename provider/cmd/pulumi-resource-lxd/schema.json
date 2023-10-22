@@ -10,7 +10,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`lxd` Terraform Provider](https://github.com/aleshkashell/terraform-provider-lxd).",
     "repository": "https://github.com/aleshkashell/pulumi-lxd",
-    "pluginDownloadURL": "https://github.com/aleshkashell/pulumi-lxd/releases/",
+    "pluginDownloadURL": "https://github.com/aleshkashell/pulumi-lxd/releases/download/v0.0.1/pulumi-resource-lxd",
     "publisher": "aleshkashell",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
